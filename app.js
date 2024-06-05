@@ -7,8 +7,8 @@ const changeTurn = () => {
 }
 
 //checking win
-const checkWin = () =>{
-    let boxtext = document.getElementsByClassName('boxtext');
+const checkWin = () => {
+    let boxtext = document.getElementsByClassName('boxtext'); //gives all span tags
     let wins = [
         [0,1,2],
         [3,4,5],
@@ -20,25 +20,33 @@ const checkWin = () =>{
         [2,4,6]
     ]
     wins.forEach( e => {
-        if((boxtext[e[0]].innerText === boxtext[e[1]].innerText) && (boxtext[e[2]].innerText === boxtext[e[1]].innerText) && 
-        (boxtext[e[0]].innerText !== '')){
-            document.querySelector('.info').innerHTML= boxtext[e[0]].innerText + " won"
+        if((boxtext[e[0]].innerText === boxtext[e[1]].innerText) && (boxtext[e[2]].innerText === boxtext[e[1]].innerText) 
+            &&  (boxtext[e[0]].innerText !== '')){
             isgameover= true;
+            turn = changeTurn();
+            window.alert(turn + " has won the match")
+            turn='X'
+            document.getElementsByClassName("info")[0].innerHTML="Turn for " + turn;
+            let boxtexts = document.querySelectorAll('.boxtext');
+            Array.from(boxtexts).forEach(element => {
+                element.innerText=""
+            });
+            isgameover= false;
         }
     })
 }
 
 //game logic
-let boxes = document.getElementsByClassName("box");
-Array.from(boxes).forEach( element =>{
-    let boxtext = element.querySelector('.boxtext');
+let boxes = document.getElementsByClassName("box"); //divs are returned
+Array.from(boxes).forEach( element =>{ 
+    let boxtext = element.querySelector('.boxtext'); //span in a div
     element.addEventListener('click',()=>{
-        if(boxtext.innerText === ''){
-            boxtext.innerText = turn;
+        if(boxtext.innerHTML === ''){
+            boxtext.innerHTML = turn;
             turn = changeTurn();
             checkWin();  
             if(!isgameover){
-                document.getElementsByClassName("info")[0].innerText="Turn for " + turn;
+                document.getElementsByClassName("info")[0].innerHTML="Turn for " + turn;
             }
         }
     })
@@ -48,9 +56,9 @@ Array.from(boxes).forEach( element =>{
 reset.addEventListener('click',()=>{
     let boxtexts = document.querySelectorAll('.boxtext');
     Array.from(boxtexts).forEach(element => {
-        element.innerText=""
+        element.innerHTML=""
     });
     turn='X'
     isgameover=false;
-    document.getElementsByClassName("info")[0].innerText="Turn for " + turn;
+    document.getElementsByClassName("info")[0].innerHTML="Turn for " + turn;
 })

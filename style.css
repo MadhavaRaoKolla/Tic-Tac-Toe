@@ -8,22 +8,19 @@ nav{
     color: black;
     height: 50px;
     font-size: 25px;
-    display: flex;
-    align-items: center;
     padding: 0 12px;
 }
 
-nav ul{
-    list-style-type: none;
+nav h1{
+    text-align: center;
 }
-
 .gameContainer{
-    /* background-color: rgb(213, 232, 9); */
     display: flex;
     justify-content: center;
     height: 500px;
     margin-top: 10px;
 }
+
 .container{
     display: grid;
     grid-template-rows: repeat(3,10vw);
@@ -63,7 +60,6 @@ nav ul{
     border-bottom: 0;
 }
 
-
 #reset{
     margin: 0 10px;
     padding: 5px;
@@ -72,9 +68,12 @@ nav ul{
     cursor: pointer;
     font-size: 15px;
     font-weight: bolder;
+    margin-top: 5px;
 }
 
 .info{
     font-size: 20px;
+    padding: 5px;
+    font-size: 25px;
 }
 
