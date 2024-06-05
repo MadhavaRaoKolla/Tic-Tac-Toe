@@ -8,7 +8,7 @@ const changeTurn = () => {
 
 //checking win
 const checkWin = () => {
-    let boxtext = document.getElementsByClassName('boxtext'); //gives all span tags
+    let boxtext = document.getElementsByClassName('content'); //gives all span tags
     let wins = [
         [0,1,2],
         [3,4,5],
@@ -20,16 +20,17 @@ const checkWin = () => {
         [2,4,6]
     ]
     wins.forEach( e => {
-        if((boxtext[e[0]].innerText === boxtext[e[1]].innerText) && (boxtext[e[2]].innerText === boxtext[e[1]].innerText) 
-            &&  (boxtext[e[0]].innerText !== '')){
+        if((boxtext[e[0]].innerHTML === boxtext[e[1]].innerHTML) && 
+            (boxtext[e[2]].innerHTML === boxtext[e[1]].innerHTML) && (boxtext[e[0]].innerHTML !== ''))
+        {
             isgameover= true;
             turn = changeTurn();
             window.alert(turn + " has won the match")
             turn='X'
             document.getElementsByClassName("info")[0].innerHTML="Turn for " + turn;
-            let boxtexts = document.querySelectorAll('.boxtext');
-            Array.from(boxtexts).forEach(element => {
-                element.innerText=""
+            let spans = document.querySelectorAll('.content');
+            Array.from(spans).forEach(elem => {
+                elem.innerHTML=""
             });
             isgameover= false;
         }
@@ -38,9 +39,9 @@ const checkWin = () => {
 
 //game logic
 let boxes = document.getElementsByClassName("box"); //divs are returned
-Array.from(boxes).forEach( element =>{ 
-    let boxtext = element.querySelector('.boxtext'); //span in a div
-    element.addEventListener('click',()=>{
+Array.from(boxes).forEach( elem =>{ 
+    let boxtext = elem.querySelector('.content'); //span in a div
+    elem.addEventListener('click',()=>{
         if(boxtext.innerHTML === ''){
             boxtext.innerHTML = turn;
             turn = changeTurn();
