@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-        <h1>Tic Tac Toe</h1>
+    <nav>   
+        <h1>TIC TAC TOE</h1>
     </nav>
+    <div class="gameInfo">
+        <h1>Welcome to Tic Tac Toe</h1>
+        <span class="info">Turn for : X</span>
+    </div>
     <div class="gameContainer">
+        <div class="playerX"> Player X  <div class="scorex"></div>  </div>
         <div class="container">
             <div class="box bt bl"><span class="content"></span></div>
             <div class="box bt"><span class="content"></span></div>
@@ -22,12 +27,10 @@
             <div class="box bb"><span class="content"></span></div>
             <div class="box bb br"><span class="content"></span></div>
         </div> 
-        <div class="gameInfo">
-            <h1>Welcome to Tic Tac Toe</h1>
-                <span class="info">Turn for X</span>
-                <br>
-                <button id="reset">Reset</button>
-        </div>
+        <div class="player0">Player 0   <div class="score0"></div>  </div>
+    </div>
+    <div class="btn">
+        <button id="reset">Reset</button>
     </div>
     <script src="app.js"></script>
 </body>
