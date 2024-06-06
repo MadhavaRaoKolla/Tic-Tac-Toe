@@ -1,19 +1,19 @@
-let turn = "X";
-let isgameover = false;
-let playerX = document.querySelector(".playerX");
-let player0 = document.querySelector(".player0");
-let scorex = document.getElementsByClassName("scorex")[0]; 
-let score0 = document.getElementsByClassName("score0")[0]; 
-let px = [];
-let p0 = [];
+let turn : string = "X";
+let isgameover : boolean = false;
+let playerX : HTMLElement | null= document.querySelector(".playerX");
+let player0 : HTMLElement = document.querySelector(".player0") as HTMLElement;
+let scorex : HTMLElement  = document.getElementsByClassName("scorex")[0] as HTMLElement; 
+let score0 : HTMLElement = document.getElementsByClassName("score0")[0] as HTMLElement; 
+let px : string [] = [];
+let p0 : string [] = [];
 
 //changing turn
-const changeTurn = () => {
+const changeTurn = () : string => {
     return turn === 'X'?'0':'X';
 };
 
 //X winning
-const xwins = () => {
+const xwins = () : void => {
     px.push("X");
     scorex.innerHTML = ""; 
     px.forEach(elem => {
@@ -28,7 +28,7 @@ const xwins = () => {
 };
 
 //0 winning
-const ywins = () => {
+const ywins = () : void => {
     p0.push("0");
     score0.innerHTML = ""; 
     p0.forEach(elem => {
@@ -43,9 +43,9 @@ const ywins = () => {
 };
 
 //checking winning
-const checkWin = () => {
-    let boxtext = document.getElementsByClassName('content'); // all spans
-    let wins = [
+const checkWin = () : void => {
+    let boxtext : HTMLCollectionOf<HTMLElement> = document.getElementsByClassName('content') as HTMLCollectionOf<HTMLElement>; // all spans
+    let wins : number[][] = [
         [0, 1, 2],
         [3, 4, 5],
         [6, 7, 8],
@@ -68,9 +68,9 @@ const checkWin = () => {
             window.alert(boxtext[e[0]].innerHTML + " has won this round");
             turn = changeTurn();
             turn = 'X';
-            document.getElementsByClassName("info")[0].innerHTML = "Turn for : " + turn;
-            let spans = document.querySelectorAll('.content');
-            Array.from(spans).forEach(elem => {
+            (document.getElementsByClassName("info")[0] as HTMLElement).innerHTML = "Turn for : " + turn;
+            let spans : NodeListOf<HTMLElement> = document.querySelectorAll('.content');
+            spans.forEach(elem => {
                 elem.innerHTML = "";
             });
             isgameover = false;
@@ -79,34 +79,36 @@ const checkWin = () => {
 };
 
 //game logic
-let boxes = document.getElementsByClassName("box"); //all divs
-Array.from(boxes).forEach(elem => {
-    let boxtext = elem.querySelector('.content'); //span in a div
+let boxes: HTMLCollectionOf<HTMLElement> = document.getElementsByClassName("box") as HTMLCollectionOf<HTMLElement>; // all divs
+for (let i = 0; i<boxes.length;i++) {
+    let elem = boxes[i];
+    let boxtext: HTMLElement = elem.querySelector('.content') as HTMLElement; // span in a div
     elem.addEventListener('click', () => {
         if (boxtext.innerHTML === '') {
             boxtext.innerHTML = turn;
-            setTimeout( checkWin )
+            setTimeout(checkWin);
             if (!isgameover) {
                 turn = changeTurn();
-                document.getElementsByClassName("info")[0].innerHTML = "Turn for : " + turn;
+                (document.getElementsByClassName("info")[0] as HTMLElement).innerHTML = "Turn for : " + turn;
             }
         }
     });
-});
+}
+
 
 //resetting
 const resetGame = () => {
-    let boxtexts = document.querySelectorAll('.content');
-    Array.from(boxtexts).forEach(element => {
+    let boxtexts : NodeListOf<HTMLElement>= document.querySelectorAll('.content');
+    boxtexts.forEach(element => {
         element.innerHTML = "";
     });
     turn = 'X';
     isgameover = false;
-    document.getElementsByClassName("info")[0].innerHTML = "Turn for : " + turn;
+    (document.getElementsByClassName("info")[0] as HTMLElement).innerHTML = "Turn for : " + turn;
     px = []; 
     p0 = []; 
     scorex.innerHTML = ""; 
     score0.innerHTML = ""; 
 };
 
-document.getElementById('reset').addEventListener('click', resetGame);
+(document.getElementById('reset') as HTMLElement).addEventListener('click', resetGame);
