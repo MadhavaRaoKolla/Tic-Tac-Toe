@@ -1,9 +1,14 @@
 let turn : string = "X";
 let isgameover : boolean = false;
-let playerX : HTMLElement | null= document.querySelector(".playerX");
+
+//same with different types
+let playerX : HTMLElement | null = document.querySelector(".playerX");
 let player0 : HTMLElement = document.querySelector(".player0") as HTMLElement;
+
+//this is definitely an element becaues of [0] so it cannot be null like query selector
 let scorex : HTMLElement  = document.getElementsByClassName("scorex")[0] as HTMLElement; 
 let score0 : HTMLElement = document.getElementsByClassName("score0")[0] as HTMLElement; 
+
 let px : string [] = [];
 let p0 : string [] = [];
 
@@ -44,7 +49,8 @@ const ywins = () : void => {
 
 //checking winning
 const checkWin = () : void => {
-    let boxtext : HTMLCollectionOf<HTMLElement> = document.getElementsByClassName('content') as HTMLCollectionOf<HTMLElement>; // all spans
+    //this is HTMLCollection of HTML Elements 
+    let boxtext : HTMLCollection = document.getElementsByClassName('content'); // all spans
     let wins : number[][] = [
         [0, 1, 2],
         [3, 4, 5],
@@ -69,6 +75,9 @@ const checkWin = () : void => {
             turn = changeTurn();
             turn = 'X';
             (document.getElementsByClassName("info")[0] as HTMLElement).innerHTML = "Turn for : " + turn;
+
+            //unless we mention HTMLElement we cant access innerHTML for a node( if it is an element 
+            //it returns all css selectors of content 
             let spans : NodeListOf<HTMLElement> = document.querySelectorAll('.content');
             spans.forEach(elem => {
                 elem.innerHTML = "";
@@ -79,22 +88,22 @@ const checkWin = () : void => {
 };
 
 //game logic
-let boxes: HTMLCollectionOf<HTMLElement> = document.getElementsByClassName("box") as HTMLCollectionOf<HTMLElement>; // all divs
-for (let i = 0; i<boxes.length;i++) {
-    let elem = boxes[i];
-    let boxtext: HTMLElement = elem.querySelector('.content') as HTMLElement; // span in a div
-    elem.addEventListener('click', () => {
-        if (boxtext.innerHTML === '') {
-            boxtext.innerHTML = turn;
-            setTimeout(checkWin);
-            if (!isgameover) {
-                turn = changeTurn();
-                (document.getElementsByClassName("info")[0] as HTMLElement).innerHTML = "Turn for : " + turn;
+let boxes: HTMLCollection = document.getElementsByClassName("box"); // all divs
+    //prototype checking for HTMLCollectionOf<HTMLElements> Array.from().forEach
+    Array.from(boxes).forEach( elem => {
+        let boxtext: HTMLElement = elem.querySelector('.content') as HTMLElement; //optional checking for null
+        //we cannot hold a null and compare it with others so definitely it should be an HTMLElement
+        elem.addEventListener('click', () => {
+            if (boxtext.innerHTML === '') {
+                boxtext.innerHTML = turn;
+                setTimeout(checkWin);
+                if (!isgameover) {
+                    turn = changeTurn();
+                    (document.getElementsByClassName("info")[0] as HTMLElement).innerHTML = "Turn for : " + turn;
+                }
             }
-        }
-    });
-}
-
+    })
+});
 
 //resetting
 const resetGame = () => {
