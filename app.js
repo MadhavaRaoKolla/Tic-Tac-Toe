@@ -17,7 +17,7 @@ const xwins = () => {
     px.push("X");
     scorex.innerHTML = ""; 
     px.forEach(elem => {
-        scorex.innerHTML += (elem + " "); 
+        scorex.innerHTML += (" " + elem); 
     });
     setTimeout( () => {
         if (px.length == 5) {
@@ -32,7 +32,7 @@ const ywins = () => {
     p0.push("0");
     score0.innerHTML = ""; 
     p0.forEach(elem => {
-        score0.innerHTML += (elem + " "); 
+        score0.innerHTML += (" " +elem); 
     });
     setTimeout( () => {
         if (p0.length == 5) {
@@ -110,3 +110,13 @@ const resetGame = () => {
 };
 
 document.getElementById('reset').addEventListener('click', resetGame);
+
+// document.querySelectorAll('.box').forEach(box => {
+//     box.addEventListener('touchstart', function() {
+//         this.classList.add('active');
+//     }, { passive: true });
+
+//     box.addEventListener('touchend', function() {
+//         this.classList.remove('active');
+//     }, { passive: true });
+// });
