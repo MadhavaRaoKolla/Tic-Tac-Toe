@@ -2,11 +2,13 @@ let turn = "X";
 let isgameover = false;
 let playerX = document.querySelector(".playerX");
 let player0 = document.querySelector(".player0");
-let scorex = document.getElementsByClassName("scorex")[0];
-let score0 = document.getElementsByClassName("score0")[0];
+// let scorex = document.getElementsByClassName("scorex")[0]; //HTML Collection
+// let score0 = document.getElementsByClassName("score0")[0];
 let px = [];
 let p0 = [];
 
+let scorex = document.querySelector(".scorex")
+let score0 = document.querySelector(".score0")
 //changing turn
 const changeTurn = () => {
   return turn === "X" ? "0" : "X";
@@ -44,7 +46,8 @@ const ywins = () => {
 
 //checking winning
 const checkWin = () => {
-  let boxtext = document.getElementsByClassName("content"); // all spans
+  // let boxtext = document.getElementsByClassName("content"); // all spans
+  let boxtext = document.querySelectorAll(".content"); // all spans //NodeList
   let wins = [
     [0, 1, 2],
     [3, 4, 5],
@@ -80,7 +83,7 @@ const checkWin = () => {
 };
 
 //game logic
-let boxes = document.getElementsByClassName("box"); //all divs
+let boxes = document.getElementsByClassName("box"); //all divs HTML collection is not an array
 Array.from(boxes).forEach((elem) => {
   let boxtext = elem.querySelector(".content"); //span in a div
   elem.addEventListener("click", () => {
@@ -98,7 +101,8 @@ Array.from(boxes).forEach((elem) => {
 
 //resetting
 const resetGame = () => {
-  let boxtexts = document.querySelectorAll(".content");
+  // let boxtexts = document.querySelectorAll(".content");
+  let boxtexts = document.getElementsByClassName("content");
   Array.from(boxtexts).forEach((element) => {
     element.innerHTML = "";
   });
