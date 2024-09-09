@@ -7,8 +7,9 @@ let player0 = document.querySelector(".player0");
 let px = [];
 let p0 = [];
 
-let scorex = document.querySelector(".scorex")
-let score0 = document.querySelector(".score0")
+let scorex = document.querySelector(".scorex");
+let score0 = document.querySelector(".score0");
+
 //changing turn
 const changeTurn = () => {
   return turn === "X" ? "0" : "X";
@@ -102,7 +103,7 @@ Array.from(boxes).forEach((elem) => {
 //resetting
 const resetGame = () => {
   // let boxtexts = document.querySelectorAll(".content");
-  let boxtexts = document.getElementsByClassName("content");
+  let boxtexts = document.getElementsByClassName("content"); //HTMLCollection
   Array.from(boxtexts).forEach((element) => {
     element.innerHTML = "";
   });
